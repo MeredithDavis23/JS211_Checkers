@@ -7,14 +7,23 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-
-function Checker() {
-  // Your code here
+class Checkers{
+  constructor(color){
+    if(color == "white"){
+      this.symbol = String.fromCharCode(0x125CB)
+    }
+    else{
+      this.symbol = String.fromCharCode(0x125CF)
+    }
+  }
 }
+
+
 
 class Board {
   constructor() {
     this.grid = []
+    this.checkers = [];
   }
   // method that creates an 8x8 array, filled with null values
   createGrid() {
@@ -53,6 +62,27 @@ class Board {
   }
 
   // Your code here
+
+  createBlackCheckers () {
+    let blackPositions = [[5, 0], [5, 2], [5, 4], [5, 6], [6, 1], [6, 3], [6, 5], [6, 7],[7, 0], [7, 2], [7, 4], [7, 6]];
+    let blackChecker = new Checkers("black")
+    for(let i=0; i <blackPositions.length; i++) {
+      this.grid[blackPositions[i][0]][blackPositions[i][1]] = blackChecker
+      this.checkers.push(blackChecker);
+    }
+  }
+  createWhiteCheckers () {
+    let  whitePositions = [[0, 1], [0, 3], [0, 5], [0, 7],[1, 0], [1, 2], [1, 4], [1, 6],[2, 1], [2, 3], [2, 5], [2, 7]];
+    let whiteChecker = new Checkers("white");
+    for(let i=0; i <whitePositions.length; i++) {
+      this.grid[whitePositions[i][0]][whitePositions[i][1]] = whiteChecker;
+      this.checkers.push(whiteChecker);
+    }
+  }
+  selectChecker(row,column) {
+    console.log(this.grid[row][column])
+    return this.grid[row][column];
+  }
 }
 
 class Game {
@@ -61,8 +91,34 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createWhiteCheckers();
+    this.board.createBlackCheckers();
   }
-}
+  moveChecker(whichPiece, toWhere){
+    let startingRow = parseInt(whichPiece[0]);
+    let startingColumn= parseInt(whichPiece[1]);
+    let endingRow = parseInt(toWhere[0]);
+    let endingColumn = parseInt(toWhere[1]);
+    let checker = this.board.selectChecker([startingRow], [startingColumn]);
+    console.log(checker);
+    this.board.grid[endingRow][endingColumn] = checker;
+    this.board.grid[startingRow][startingColumn] = null;
+    // if((endingRow % 2 == 0 && endingColumn % 2 != 0) ||
+    // (endingRow % 2 != 0 && endingColumn % 2 == 0)){
+    // checker.splice(0, 1);
+    // checker = this.board.grid.push([endingRow][endingColumn]);
+    // return whichPiece = null;
+    // }
+    }
+    }
+
+// //if(endingRow % 2 == 0 && endingColumn % 2 != 0) {
+//   return true}
+// //if(endingColumn % 2 == 0 && endingRow % 2 != 0) {
+//   return true} else {
+//     return false};
+
+
 
 function getPrompt() {
   game.board.viewGrid();
