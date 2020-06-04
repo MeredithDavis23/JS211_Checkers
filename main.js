@@ -83,6 +83,10 @@ class Board {
     console.log(this.grid[row][column])
     return this.grid[row][column];
   }
+  killChecker(position) {
+    let position = [row,column];
+    this.selectChecker(position) = indexOf()
+  }
 }
 
 class Game {
@@ -105,18 +109,10 @@ class Game {
     this.board.grid[startingRow][startingColumn] = null;
     // if((endingRow % 2 == 0 && endingColumn % 2 != 0) ||
     // (endingRow % 2 != 0 && endingColumn % 2 == 0)){
-    // checker.splice(0, 1);
-    // checker = this.board.grid.push([endingRow][endingColumn]);
-    // return whichPiece = null;
+  
     // }
     }
     }
-
-// //if(endingRow % 2 == 0 && endingColumn % 2 != 0) {
-//   return true}
-// //if(endingColumn % 2 == 0 && endingRow % 2 != 0) {
-//   return true} else {
-//     return false};
 
 
 
