@@ -84,8 +84,10 @@ class Board {
     return this.grid[row][column];
   }
   killChecker(position) {
-    let position = [row,column];
-    this.selectChecker(position) = indexOf()
+    this.checkers.splice(position, 1)
+    // this.board.grid.position = null;
+    // let position = [row,column];
+    // this.selectChecker(position) = indexOf()
   }
 }
 
@@ -107,10 +109,16 @@ class Game {
     console.log(checker);
     this.board.grid[endingRow][endingColumn] = checker;
     this.board.grid[startingRow][startingColumn] = null;
-    // if((endingRow % 2 == 0 && endingColumn % 2 != 0) ||
-    // (endingRow % 2 != 0 && endingColumn % 2 == 0)){
-  
-    // }
+
+    if (Math.abs(whichPiece[0] - toWhere[0]) == 2) {
+      const midPointRow = (parseInt(whichPiece[0]) + parseInt(toWhere[0])) / 2;
+      console.log(midPointRow + "test one")
+      const midPointColumn = (parseInt(whichPiece[1]) + parseInt(toWhere[1])) / 2;
+      console.log(midPointColumn + "test two")
+      let killPosition = this.board.selectChecker(midPointRow, midPointColumn);
+      this.board.killChecker(killPosition);
+      this.board.grid[midPointRow][midPointColumn] = null;
+    }
     }
     }
 
